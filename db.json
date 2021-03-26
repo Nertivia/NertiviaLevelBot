@@ -1,0 +1,84 @@
+{
+  "users": [
+    {
+      "id": "763085785093499319",
+      "level": 5,
+      "xp": 1672,
+      "lastXPDate": 1614696297409,
+      "tempUsername": "Pankēki",
+      "lastRepDate": 1614952625335,
+      "rep": 1,
+      "bgColor": "var(--primary-color)"
+    },
+    {
+      "id": "263063969279190832",
+      "level": 5,
+      "xp": 2183,
+      "lastXPDate": 1614626778407,
+      "tempUsername": "bree",
+      "rep": 1,
+      "lastRepDate": 1614616603662,
+      "bgColor": "var(--background-color)"
+    },
+    {
+      "id": "6767825092106784768",
+      "level": 3,
+      "xp": 545,
+      "lastXPDate": 1614614212320,
+      "tempUsername": "galaxy blob"
+    },
+    {
+      "id": "6662607075900035072",
+      "level": 2,
+      "xp": 320,
+      "lastXPDate": 1614623453742,
+      "tempUsername": "Cyber"
+    },
+    {
+      "id": "6618745676224270336",
+      "level": 1,
+      "xp": 11,
+      "lastXPDate": 1614615725334,
+      "tempUsername": "EveryOS"
+    },
+    {
+      "id": "6692353538904821760",
+      "level": 1,
+      "xp": 25,
+      "lastXPDate": 1614626668350,
+      "tempUsername": "Tibbs",
+      "bgColor": "pink"
+    },
+    {
+      "id": "6772522273933889536",
+      "level": 1,
+      "xp": 0,
+      "lastXPDate": 1614695841874
+    },
+    {
+      "id": "6755867649273499648",
+      "level": 1,
+      "xp": 0,
+      "lastXPDate": 1614700389967
+    },
+    {
+      "id": "6642526214797922304",
+      "level": 1,
+      "xp": 0,
+      "lastXPDate": 1614952302272,
+      "lastRepDate": 1614952302273
+    },
+    {
+      "level": 1,
+      "xp": 0,
+      "lastXPDate": 1614952302273,
+      "rep": 2
+    },
+    {
+      "level": 1,
+      "xp": 0,
+      "lastXPDate": 1614952583638,
+      "rep": 2
+    }
+  ]
+}
