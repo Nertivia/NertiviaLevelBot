@@ -24,18 +24,10 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - name: Deploy to Server
-        uses: easingthemes/ssh-deploy@v2.1.5
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.KEY }}
-          SOURCE: "/"
-          REMOTE_HOST: ${{ secrets.HOST }}
-          REMOTE_USER: ${{ secrets.USER }}
-          TARGET: /root/nertivia-level-bot
-      - name: npm i & restart bot
+      - name: git clone, npm i & restart bot
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: npm i --prefix /root/nertivia-level-bot ; pm2 restart level-bot --silent
+          command: cd /root/nertivia-level-bot ; git clone ; npm i ; pm2 restart level-bot --silent
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           privateKey: ${{ secrets.KEY }}  
