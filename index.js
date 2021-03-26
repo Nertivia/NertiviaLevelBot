@@ -3,7 +3,6 @@ const { default: Message } = require('nertivia.js/dist/Message');
 const database = require('./database');
 const client = new nertivia.Client();
 require('dotenv').config();
-const dev = false;
 
 // give XP every 60 seconds if talk
 const giveXPEvery = 60 * 1000;
@@ -63,7 +62,7 @@ client.on("ready", () => {
 
 client.on("message", msg => {
     if (msg.author.bot) return;
-    if (!dev && giveXP(msg.author.id)) {
+    if (!process.env.DEVELOPMENT && giveXP(msg.author.id)) {
         addXP(msg)
     }
     commands(msg);
@@ -73,7 +72,7 @@ client.on("message", msg => {
  * @param {Message} msg
  */
 function commands(msg) {
-    const PREFIX = dev ? 'd/' :"/"
+    const PREFIX = process.env.DEVELOPMENT ? 'd/' :"/"
     if (!msg.content) return;
     const [command, ...args] = msg.content.split(' ');
     if (command === PREFIX + "profile") return profileCommand(msg);
