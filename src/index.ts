@@ -8,7 +8,8 @@ import { Leaderboard, Profile } from "./components";
 const config = {
   prefix: process.env.PREFIX ?? "!",
   token: process.env.TOKEN!,
-  dev: process.env.DEV
+  // env is read as a string for every value :/
+  dev: process.env.DEV === "true"
 };
 
 export const levelXp = (level: number) => (level * level) * 100;
