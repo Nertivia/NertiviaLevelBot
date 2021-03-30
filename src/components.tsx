@@ -14,8 +14,8 @@ const backgroundStyle = (user: DB.User) => {
   }
 }
 
-export const Leaderboard = async () => {
-  const users = await DB.rankedUsers(10)
+export const Leaderboard = async ({ users }: { users: DB.RankedUser[] }) => {
+  const topUser = await DB.getUser(users[0].id)
 
   return (
     <div style={{
@@ -23,7 +23,7 @@ export const Leaderboard = async () => {
       width: '100%',
       borderRadius: "4px",
       overflow: "hidden",
-      ...backgroundStyle(users[0])
+      ...backgroundStyle(topUser)
     }}>
       <div style={{
         display: "flex",

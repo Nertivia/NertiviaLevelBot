@@ -78,12 +78,12 @@ const commands: Commands = {
   async timeLeft(msg) {
     const user = await DB.getUser(msg.author.id);
     const timeout = XP_TIMEOUT - (Date.now() - user.lastXPDate);
-    msg.reply(`Time left until more XP: ${timeout}`);
+    await msg.reply(`Time left until more XP: ${timeout}`);
   },
   async leaderboard(msg) {
-    const leaderboard = await DB.rankedUsers(10);
+    const rankedUsers = await DB.rankedUsers(10);
     await msg.send("Leaderboard:", {
-      htmlEmbed: await Leaderboard(),
+      htmlEmbed: await Leaderboard({ users: rankedUsers }),
     });
   },
   async set(msg, [cmd, ...args]) {
@@ -99,12 +99,12 @@ const commands: Commands = {
     const repUser = msg.mentions.users.first();
 
     if (!repUser) {
-      msg.reply(`Usage: ${config.prefix}rep @username`);
+      await msg.reply(`Usage: ${config.prefix}rep @username`);
       return;
     }
 
     if (repUser.id === author.id) {
-      msg.send("You cannot rep yourself.");
+      await msg.send("You cannot rep yourself.");
       return;
     }
 
@@ -115,11 +115,11 @@ const commands: Commands = {
         lastRepDate: Date.now(),
       });
 
-      msg.send(
+      await msg.send(
         `${repUser}, you have been repped by ${msg.author}. You now have ${reps} rep points.`,
       );
     } else {
-      msg.reply(
+      await msg.reply(
         `You may rep again in ${formatDuration(REP_TIMEOUT - timePassed)}`,
       );
     }

@@ -2,7 +2,7 @@ import { Knex, knex } from "knex";
 import knexfile from "../knexfile";
 
 export const db = knex(
-  knexfile[process.env.DEV  === "true" ? "development" : "production"],
+  knexfile[process.env.DEV === "true" ? "development" : "production"],
 );
 
 export interface User {
@@ -14,6 +14,8 @@ export interface User {
   profileBackgroundType: "color" | "url" | null;
   profileBackground: string | null;
 }
+
+export type RankedUser = Pick<User, 'id' | 'xp'> & { rank: number };
 
 export const Users = () => db<User>("users");
 
@@ -28,7 +30,7 @@ export const getUserRaw = (id: string) =>
 
 export const rankedUsers = (
   limit: number,
-): Promise<(User & { rank: number })[]> =>
+): Promise<RankedUser[]> =>
   db.raw(
     "SELECT id, xp, DENSE_RANK() OVER ( ORDER BY xp DESC ) rank FROM users LIMIT ?",
     [limit],
