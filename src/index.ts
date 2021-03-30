@@ -6,10 +6,13 @@ import { formatDuration } from "./utils";
 import { Leaderboard, Profile } from "./components";
 
 const config = {
+  xp_timeout: 1000 * 60 * 1 * 1,
+  rep_timeout: 1000 * 60 * 60 * 24,
+
   prefix: process.env.PREFIX ?? "!",
   token: process.env.TOKEN!,
   // env is read as a string for every value :/
-  dev: process.env.DEV === "true"
+  dev: process.env.DEV === "true",
 };
 
 export const levelXp = (level: number) => (level * level) * 100;
@@ -24,13 +27,10 @@ export const xpUntilNextLevel = (xp: number) => {
   return levelXp(level) - xp;
 };
 
-const XP_TIMEOUT = 60_000;
-const REP_TIMEOUT = 600_000;
-
 async function updateXP(msg: Message) {
   const user = await DB.getUser(msg.author.id);
 
-  if (user && (Date.now() - user.lastXPDate) > XP_TIMEOUT) {
+  if (user && (Date.now() - user.lastXPDate) > config.xp_timeout) {
     const before = xpAsLevels(user.xp);
     const xpAmount = Math.floor((Math.random() * 60) + 1);
     const added = await DB.addXp(msg.author.id, xpAmount);
@@ -58,7 +58,7 @@ const setCommands: Commands = {
       await msg.reply(`Successfully reset your background to none`, {
         htmlEmbed: await Profile(msg.author),
       });
-      return
+      return;
     }
     if (val == null) {
       throw new Error(`No background was set.`);
@@ -77,7 +77,7 @@ const setCommands: Commands = {
 const commands: Commands = {
   async timeLeft(msg) {
     const user = await DB.getUser(msg.author.id);
-    const timeout = XP_TIMEOUT - (Date.now() - user.lastXPDate);
+    const timeout = config.xp_timeout - (Date.now() - user.lastXPDate);
     await msg.reply(`Time left until more XP: ${timeout}`);
   },
   async leaderboard(msg) {
@@ -108,7 +108,7 @@ const commands: Commands = {
       return;
     }
 
-    if (timePassed > REP_TIMEOUT) {
+    if (timePassed > config.rep_timeout) {
       const reps = await DB.addReps(repUser.id);
 
       await DB.Users().where("id", author.id).update({
@@ -120,7 +120,9 @@ const commands: Commands = {
       );
     } else {
       await msg.reply(
-        `You may rep again in ${formatDuration(REP_TIMEOUT - timePassed)}`,
+        `You may rep again in ${
+          formatDuration(config.rep_timeout - timePassed)
+        }`,
       );
     }
   },
@@ -167,7 +169,7 @@ client.on(
         `${client.user?.tag} to ${client.guilds.cache.size} server(s).`,
     );
 
-    if(config.dev) {
+    if (config.dev) {
       await client.user?.setStatus("ltp");
     }
 
