@@ -2,7 +2,7 @@ import { Knex, knex } from "knex";
 import knexfile from "../knexfile";
 
 export const db = knex(
-  knexfile[process.env.DEV ? "development" : "production"],
+  knexfile[process.env.DEV  === "true" ? "development" : "production"],
 );
 
 export interface User {
