@@ -16,7 +16,7 @@ export const levelXp = (level: number) => (level * level) * 100;
 
 export const xpAsLevels = (xp: number) => {
   const level = Math.floor(Math.sqrt(xp / 100));
-  return { level: level, xp: xp - levelXp(level) };
+  return { level: level + 1, xp: xp - levelXp(level) };
 };
 
 export const xpUntilNextLevel = (xp: number) => {
