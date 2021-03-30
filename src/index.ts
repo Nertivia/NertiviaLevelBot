@@ -53,15 +53,17 @@ type Commands = Record<
 
 const setCommands: Commands = {
   async bg(msg, [type, val]) {
-    if (val == null) {
-      throw new Error(`No background value set...`);
-    }
     if (type === "none") {
       await DB.unsetBackground(msg.author.id);
-      msg.reply(`Successfully reset your background to none`, {
+      await msg.reply(`Successfully reset your background to none`, {
         htmlEmbed: await Profile(msg.author),
       });
-    } else if (type === "url" || type === "color") {
+      return
+    }
+    if (val == null) {
+      throw new Error(`No background was set.`);
+    }
+    if (type === "url" || type === "color") {
       await DB.setBackground(msg.author.id, type, val);
       msg.reply(`Successfully set your background to: \`\`${val}\`\``, {
         htmlEmbed: await Profile(msg.author),

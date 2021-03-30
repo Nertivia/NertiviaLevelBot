@@ -11,8 +11,8 @@ export interface User {
   reps: number;
   lastXPDate: number;
   lastRepDate: number;
-  profileBackgroundType?: "color" | "url";
-  profileBackground?: string;
+  profileBackgroundType: "color" | "url" | null;
+  profileBackground: string | null;
 }
 
 export const Users = () => db<User>("users");
@@ -72,6 +72,6 @@ export const setBackground = (
 
 export const unsetBackground = (id: string) =>
   Users().where("id", id).update({
-    profileBackground: undefined,
-    profileBackgroundType: undefined,
+    profileBackground: null,
+    profileBackgroundType: null,
   });

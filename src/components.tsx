@@ -6,9 +6,9 @@ import { client, levelXp, xpAsLevels, xpUntilNextLevel } from '.'
 const backgroundStyle = (user: DB.User) => {
   switch (user.profileBackgroundType) {
     case "color":
-      return { backgroundColor: user.profileBackground }
+      return { backgroundColor: user.profileBackground ?? undefined }
     case "url":
-      return { backgroundImage: user.profileBackground, backgroundPosition: "center", backgroundSize: "cover" }
+      return { backgroundImage: user.profileBackground ?? undefined, backgroundPosition: "center", backgroundSize: "cover" }
     default:
       return {}
   }
