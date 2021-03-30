@@ -93,6 +93,7 @@ export const Profile = async (user: User) => {
         <AvatarImage url={user.avatarURL} />
         <RoundedBubble text={`${dbUser?.reps} Reps`} />
         <strong style={{ marginTop: '5px' }}>{user.username}</strong>
+        <BorderedBox text={`Level ${levels.level}`} />
         <ProgressBar max={levelXp(levels.level + 1)} val={levels.xp} />
         <div style={{
           position: "absolute",
@@ -119,6 +120,20 @@ const RoundedBubble = ({ text }: { text: string }) => {
       marginTop: "-20px",
       backgroundColor: "var(--primary-color)",
       borderRadius: "10px",
+      padding: "4px",
+      fontSize: "14px",
+    }}>{text}</div>
+  )
+}
+
+const BorderedBox = ({ text }: { text: string }) => {
+  return (
+    <div style={{
+      marginTop: "4px",
+      border: "solid 1px var(--primary-color)",
+      backgroundColor: 'rgba(0,0,0,0.4)',
+      backdropFilter: "blur(8px)",
+      borderRadius: "4px",
       padding: "4px",
       fontSize: "14px",
     }}>{text}</div>
