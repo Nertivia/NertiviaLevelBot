@@ -27,7 +27,7 @@ jobs:
       - name: git pull, npm i & restart bot
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: cd /root/nertivia-level-bot ; git pull ; npm i ; npm run migrate:latest -- --env production ; pm2 restart level-bot --silent
+          command: cd /root/nertivia-level-bot ; git stash save --keep-index --include-untracked ; git pull ; npm i ; npm run migrate:latest -- --env production ; pm2 restart level-bot --silent
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           privateKey: ${{ secrets.KEY }}  
