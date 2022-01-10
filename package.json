@@ -18,7 +18,7 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "knex": "^0.95.4",
-    "nertivia.js": "^1.3.14",
+    "nertivia.js": "^1.3.18",
     "sqlite3": "^5.0.2"
   },
   "devDependencies": {
